@@ -326,6 +326,25 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 sw.WriteLine(prefix + "public T DeepCopy<T>() where T : {0}", type.AssignedName);
                 sw.WriteLine(prefix + "{");
                 sw.WriteLine(prefix + "    var clone = (T)MemberwiseClone();");
+                foreach (var field in theFields)
+                {
+                    switch (config.PropertieMode)
+                    {
+                        case PropertyModeEnum.Properties:
+                        case PropertyModeEnum.Fields:
+                            if(field.Type.GetTypeName().ToLower().Contains("list"))
+                                sw.WriteLine(prefix + "    clone.{0} = {0}.ToList();", field.MemberName);
+                            else
+                            sw.WriteLine(prefix + "    clone.{0} = {0};", field.MemberName);
+                            break;
+                        case PropertyModeEnum.FullProperty:
+                            if (field.Type.GetTypeName().ToLower().Contains("list"))
+                                sw.WriteLine(prefix + "    clone._{0} = _{0}.ToList();", field.JsonMemberName);
+                            else
+                                sw.WriteLine(prefix + "    clone._{0} = _{0};", field.JsonMemberName);
+                            break;
+                    }
+                }
                 sw.WriteLine(prefix + "    return clone;");
                 sw.WriteLine(prefix + "}");
             }
