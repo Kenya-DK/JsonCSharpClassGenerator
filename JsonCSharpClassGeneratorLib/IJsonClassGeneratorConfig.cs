@@ -9,7 +9,10 @@ namespace Xamasoft.JsonClassGenerator
     {
         string Namespace { get; set; }
         string SecondaryNamespace { get; set; }
-        bool UseProperties { get; set; }
+        PropertyModeEnum PropertieMode { get; set; }
+        bool UseRegions { get; set; }
+        bool CreateNew { get; set; }
+        bool CreateCopyable { get; set; }
         bool InternalVisibility { get; set; }
         bool ExplicitDeserialization { get; set; }
         bool NoHelperClass { get; set; }

@@ -5,8 +5,8 @@
     <Setting Name="Namespace" Type="System.String" Scope="User">
       <Value Profile="(Default)">Example</Value>
     </Setting>
-    <Setting Name="UseProperties" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="PropertieMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SecondaryNamespace" Type="System.String" Scope="User">
       <Value Profile="(Default)">Example.JsonTypes</Value>
@@ -52,6 +52,15 @@
     </Setting>
     <Setting Name="DeDuplicateClasses" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseRegions" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CreateCopyable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CreateNew" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

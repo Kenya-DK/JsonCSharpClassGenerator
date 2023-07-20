@@ -21,7 +21,10 @@ namespace Xamasoft.JsonClassGenerator
         public string TargetFolder { get; set; }
         public string Namespace { get; set; }
         public string SecondaryNamespace { get; set; }
-        public bool UseProperties { get; set; }
+        public PropertyModeEnum PropertieMode { get; set; }
+        public bool UseRegions { get; set; }
+        public bool CreateNew { get; set; }
+        public bool CreateCopyable { get; set; }
         public bool InternalVisibility { get; set; }
         public bool ExplicitDeserialization { get; set; }
         public bool NoHelperClass { get; set; }
@@ -43,7 +46,7 @@ namespace Xamasoft.JsonClassGenerator
 
         private bool used = false;
         public bool UseNamespaces { get { return Namespace != null; } }
-
+        
         public void GenerateClasses()
         {
             if (CodeWriter == null) CodeWriter = new CSharpCodeWriter();

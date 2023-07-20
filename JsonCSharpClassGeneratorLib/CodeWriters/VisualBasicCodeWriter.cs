@@ -54,7 +54,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
         }
         private bool ShouldApplyNoPruneAttribute(IJsonClassGeneratorConfig config)
         {
-            return config.ApplyObfuscationAttributes && !config.ExplicitDeserialization && config.UseProperties;
+            return config.ApplyObfuscationAttributes && !config.ExplicitDeserialization && config.PropertieMode == PropertyModeEnum.Properties;
         }
 
         public void WriteClass(IJsonClassGeneratorConfig config, TextWriter sw, JsonType type)
@@ -110,7 +110,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     sw.WriteLine(prefix + "<JsonProperty(\"{0}\")>", field.JsonMemberName);
                 }
 
-                if (config.UseProperties)
+                if (config.PropertieMode == PropertyModeEnum.Properties)
                 {
                     sw.WriteLine(prefix + "Public Property {1} As {0}", field.Type.GetTypeName(), field.MemberName);
                 }

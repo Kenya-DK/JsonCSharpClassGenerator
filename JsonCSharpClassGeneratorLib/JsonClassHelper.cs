@@ -11,7 +11,6 @@ namespace JsonCSharpClassGenerator
 {
     internal static class JsonClassHelper
     {
-
         public static T GetJToken<T>(JObject obj, string field) where T : JToken
         {
             JToken value;

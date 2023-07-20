@@ -39,6 +39,7 @@
             this.radPublic = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radProperties = new System.Windows.Forms.RadioButton();
+            this.radFullProperty = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.radInternal = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -52,13 +53,6 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
-            this.chkApplyObfuscationAttributes = new System.Windows.Forms.CheckBox();
-            this.chkExplicitDeserialization = new System.Windows.Forms.CheckBox();
-            this.chkPascalCase = new System.Windows.Forms.CheckBox();
-            this.edtMainClass = new System.Windows.Forms.TextBox();
-            this.edtTargetFolder = new System.Windows.Forms.TextBox();
-            this.chkNoHelper = new System.Windows.Forms.CheckBox();
-            this.edtNamespace = new System.Windows.Forms.TextBox();
             this.chkSingleFile = new System.Windows.Forms.CheckBox();
             this.lblDone = new System.Windows.Forms.Label();
             this.lnkOpenFolder = new Xamasoft.Controls.BetterLinkLabel();
@@ -66,7 +60,6 @@
             this.btnPasteAndGo = new System.Windows.Forms.Button();
             this.lblDoneClipboard = new System.Windows.Forms.Label();
             this.chkDocumentationExamples = new System.Windows.Forms.CheckBox();
-            this.chkSortMembers = new System.Windows.Forms.CheckBox();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,10 +79,21 @@
             this.saveDlg = new System.Windows.Forms.SaveFileDialog();
             this.edtJson = new EasyScintilla.SimpleEditor();
             this.lblPosition = new System.Windows.Forms.Label();
-            this.chkDeduplicate = new System.Windows.Forms.CheckBox();
             this.feedbackLabel = new System.Windows.Forms.Label();
             this.btnCompact = new System.Windows.Forms.Button();
             this.btnBeautify = new System.Windows.Forms.Button();
+            this.chkCreateNew = new System.Windows.Forms.CheckBox();
+            this.chkCreateCopyable = new System.Windows.Forms.CheckBox();
+            this.chkUseRegions = new System.Windows.Forms.CheckBox();
+            this.chkDeduplicate = new System.Windows.Forms.CheckBox();
+            this.chkSortMembers = new System.Windows.Forms.CheckBox();
+            this.chkApplyObfuscationAttributes = new System.Windows.Forms.CheckBox();
+            this.chkExplicitDeserialization = new System.Windows.Forms.CheckBox();
+            this.chkPascalCase = new System.Windows.Forms.CheckBox();
+            this.edtMainClass = new System.Windows.Forms.TextBox();
+            this.edtTargetFolder = new System.Windows.Forms.TextBox();
+            this.chkNoHelper = new System.Windows.Forms.CheckBox();
+            this.edtNamespace = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -169,9 +173,10 @@
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.radProperties);
             this.flowLayoutPanel1.Controls.Add(this.radFields);
+            this.flowLayoutPanel1.Controls.Add(this.radFullProperty);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(458, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 23);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(225, 23);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // radProperties
@@ -185,6 +190,16 @@
             this.radProperties.TabStop = true;
             this.radProperties.Text = "Properties";
             this.radProperties.UseVisualStyleBackColor = true;
+            // 
+            // radFullProperty
+            // 
+            this.radFullProperty.AutoSize = true;
+            this.radFullProperty.Location = new System.Drawing.Point(139, 3);
+            this.radFullProperty.Name = "radFullProperty";
+            this.radFullProperty.Size = new System.Drawing.Size(83, 17);
+            this.radFullProperty.TabIndex = 1;
+            this.radFullProperty.Text = "Full Property";
+            this.radFullProperty.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel2
             // 
@@ -324,87 +339,6 @@
             this.lblLanguage.TabIndex = 37;
             this.lblLanguage.Text = "Language:";
             // 
-            // chkApplyObfuscationAttributes
-            // 
-            this.chkApplyObfuscationAttributes.AutoSize = true;
-            this.chkApplyObfuscationAttributes.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.ApplyObfuscationAttributes;
-            this.chkApplyObfuscationAttributes.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "ApplyObfuscationAttributes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkApplyObfuscationAttributes.Location = new System.Drawing.Point(349, 153);
-            this.chkApplyObfuscationAttributes.Name = "chkApplyObfuscationAttributes";
-            this.chkApplyObfuscationAttributes.Size = new System.Drawing.Size(203, 17);
-            this.chkApplyObfuscationAttributes.TabIndex = 12;
-            this.chkApplyObfuscationAttributes.Text = "Apply obfuscation exclusion attributes";
-            this.chkApplyObfuscationAttributes.UseVisualStyleBackColor = true;
-            // 
-            // chkExplicitDeserialization
-            // 
-            this.chkExplicitDeserialization.AutoSize = true;
-            this.chkExplicitDeserialization.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UseExplicitDeserialization;
-            this.chkExplicitDeserialization.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UseExplicitDeserialization", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkExplicitDeserialization.Location = new System.Drawing.Point(349, 107);
-            this.chkExplicitDeserialization.Name = "chkExplicitDeserialization";
-            this.chkExplicitDeserialization.Size = new System.Drawing.Size(198, 17);
-            this.chkExplicitDeserialization.TabIndex = 10;
-            this.chkExplicitDeserialization.Text = "Use explicit deserialization (obsolete)";
-            this.chkExplicitDeserialization.UseVisualStyleBackColor = true;
-            this.chkExplicitDeserialization.CheckedChanged += new System.EventHandler(this.chkExplicitDeserialization_CheckedChanged);
-            // 
-            // chkPascalCase
-            // 
-            this.chkPascalCase.AutoSize = true;
-            this.chkPascalCase.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UsePascalCase;
-            this.chkPascalCase.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPascalCase.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UsePascalCase", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkPascalCase.Location = new System.Drawing.Point(349, 84);
-            this.chkPascalCase.Name = "chkPascalCase";
-            this.chkPascalCase.Size = new System.Drawing.Size(134, 17);
-            this.chkPascalCase.TabIndex = 9;
-            this.chkPascalCase.Text = "Convert to PascalCase";
-            this.chkPascalCase.UseVisualStyleBackColor = true;
-            // 
-            // edtMainClass
-            // 
-            this.edtMainClass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "MainClassName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtMainClass.Location = new System.Drawing.Point(115, 54);
-            this.edtMainClass.Name = "edtMainClass";
-            this.edtMainClass.Size = new System.Drawing.Size(185, 20);
-            this.edtMainClass.TabIndex = 1;
-            this.edtMainClass.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.MainClassName;
-            this.edtMainClass.TextChanged += new System.EventHandler(this.edtMainClass_TextChanged);
-            // 
-            // edtTargetFolder
-            // 
-            this.edtTargetFolder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.edtTargetFolder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.edtTargetFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "TargetFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtTargetFolder.Location = new System.Drawing.Point(115, 82);
-            this.edtTargetFolder.Name = "edtTargetFolder";
-            this.edtTargetFolder.Size = new System.Drawing.Size(155, 20);
-            this.edtTargetFolder.TabIndex = 2;
-            this.edtTargetFolder.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.TargetFolder;
-            // 
-            // chkNoHelper
-            // 
-            this.chkNoHelper.AutoSize = true;
-            this.chkNoHelper.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.NoHelper;
-            this.chkNoHelper.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "NoHelper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkNoHelper.Location = new System.Drawing.Point(366, 130);
-            this.chkNoHelper.Name = "chkNoHelper";
-            this.chkNoHelper.Size = new System.Drawing.Size(162, 17);
-            this.chkNoHelper.TabIndex = 11;
-            this.chkNoHelper.Text = "Do not generate helper class";
-            this.chkNoHelper.UseVisualStyleBackColor = true;
-            // 
-            // edtNamespace
-            // 
-            this.edtNamespace.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "Namespace", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtNamespace.Location = new System.Drawing.Point(115, 27);
-            this.edtNamespace.Name = "edtNamespace";
-            this.edtNamespace.Size = new System.Drawing.Size(185, 20);
-            this.edtNamespace.TabIndex = 0;
-            this.edtNamespace.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.Namespace;
-            this.edtNamespace.TextChanged += new System.EventHandler(this.edtNamespace_TextChanged);
-            // 
             // chkSingleFile
             // 
             this.chkSingleFile.AutoSize = true;
@@ -479,19 +413,6 @@
             this.chkDocumentationExamples.TabIndex = 40;
             this.chkDocumentationExamples.Text = "Generate documentation with data examples";
             this.chkDocumentationExamples.UseVisualStyleBackColor = true;
-            // 
-            // chkSortMembers
-            // 
-            this.chkSortMembers.AutoSize = true;
-            this.chkSortMembers.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.SortMemberFields;
-            this.chkSortMembers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSortMembers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "SortMemberFields", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSortMembers.Location = new System.Drawing.Point(621, 85);
-            this.chkSortMembers.Name = "chkSortMembers";
-            this.chkSortMembers.Size = new System.Drawing.Size(112, 17);
-            this.chkSortMembers.TabIndex = 41;
-            this.chkSortMembers.Text = "Sort member fields";
-            this.chkSortMembers.UseVisualStyleBackColor = true;
             // 
             // MainMenu
             // 
@@ -651,18 +572,6 @@
             this.lblPosition.TabIndex = 44;
             this.lblPosition.Text = "0 / 0";
             // 
-            // chkDeduplicate
-            // 
-            this.chkDeduplicate.AutoSize = true;
-            this.chkDeduplicate.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.DeDuplicateClasses;
-            this.chkDeduplicate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "DeDuplicateClasses", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkDeduplicate.Location = new System.Drawing.Point(621, 106);
-            this.chkDeduplicate.Name = "chkDeduplicate";
-            this.chkDeduplicate.Size = new System.Drawing.Size(124, 17);
-            this.chkDeduplicate.TabIndex = 45;
-            this.chkDeduplicate.Text = "De-duplicate classes";
-            this.chkDeduplicate.UseVisualStyleBackColor = true;
-            // 
             // feedbackLabel
             // 
             this.feedbackLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -695,6 +604,151 @@
             this.btnBeautify.UseVisualStyleBackColor = true;
             this.btnBeautify.Click += new System.EventHandler(this.btnBeautify_Click);
             // 
+            // chkCreateNew
+            // 
+            this.chkCreateNew.AutoSize = true;
+            this.chkCreateNew.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.CreateNew;
+            this.chkCreateNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCreateNew.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "CreateNew", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkCreateNew.Location = new System.Drawing.Point(621, 176);
+            this.chkCreateNew.Name = "chkCreateNew";
+            this.chkCreateNew.Size = new System.Drawing.Size(82, 17);
+            this.chkCreateNew.TabIndex = 45;
+            this.chkCreateNew.Text = "Create New";
+            this.chkCreateNew.UseVisualStyleBackColor = true;
+            // 
+            // chkCreateCopyable
+            // 
+            this.chkCreateCopyable.AutoSize = true;
+            this.chkCreateCopyable.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.CreateCopyable;
+            this.chkCreateCopyable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCreateCopyable.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "CreateCopyable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkCreateCopyable.Location = new System.Drawing.Point(621, 153);
+            this.chkCreateCopyable.Name = "chkCreateCopyable";
+            this.chkCreateCopyable.Size = new System.Drawing.Size(104, 17);
+            this.chkCreateCopyable.TabIndex = 45;
+            this.chkCreateCopyable.Text = "Create Copyable";
+            this.chkCreateCopyable.UseVisualStyleBackColor = true;
+            // 
+            // chkUseRegions
+            // 
+            this.chkUseRegions.AutoSize = true;
+            this.chkUseRegions.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UseRegions;
+            this.chkUseRegions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseRegions.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UseRegions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkUseRegions.Location = new System.Drawing.Point(621, 129);
+            this.chkUseRegions.Name = "chkUseRegions";
+            this.chkUseRegions.Size = new System.Drawing.Size(65, 17);
+            this.chkUseRegions.TabIndex = 45;
+            this.chkUseRegions.Text = "Regions";
+            this.chkUseRegions.UseVisualStyleBackColor = true;
+            // 
+            // chkDeduplicate
+            // 
+            this.chkDeduplicate.AutoSize = true;
+            this.chkDeduplicate.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.DeDuplicateClasses;
+            this.chkDeduplicate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "DeDuplicateClasses", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkDeduplicate.Location = new System.Drawing.Point(621, 106);
+            this.chkDeduplicate.Name = "chkDeduplicate";
+            this.chkDeduplicate.Size = new System.Drawing.Size(124, 17);
+            this.chkDeduplicate.TabIndex = 45;
+            this.chkDeduplicate.Text = "De-duplicate classes";
+            this.chkDeduplicate.UseVisualStyleBackColor = true;
+            // 
+            // chkSortMembers
+            // 
+            this.chkSortMembers.AutoSize = true;
+            this.chkSortMembers.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.SortMemberFields;
+            this.chkSortMembers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSortMembers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "SortMemberFields", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSortMembers.Location = new System.Drawing.Point(621, 85);
+            this.chkSortMembers.Name = "chkSortMembers";
+            this.chkSortMembers.Size = new System.Drawing.Size(112, 17);
+            this.chkSortMembers.TabIndex = 41;
+            this.chkSortMembers.Text = "Sort member fields";
+            this.chkSortMembers.UseVisualStyleBackColor = true;
+            // 
+            // chkApplyObfuscationAttributes
+            // 
+            this.chkApplyObfuscationAttributes.AutoSize = true;
+            this.chkApplyObfuscationAttributes.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.ApplyObfuscationAttributes;
+            this.chkApplyObfuscationAttributes.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "ApplyObfuscationAttributes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkApplyObfuscationAttributes.Location = new System.Drawing.Point(349, 153);
+            this.chkApplyObfuscationAttributes.Name = "chkApplyObfuscationAttributes";
+            this.chkApplyObfuscationAttributes.Size = new System.Drawing.Size(203, 17);
+            this.chkApplyObfuscationAttributes.TabIndex = 12;
+            this.chkApplyObfuscationAttributes.Text = "Apply obfuscation exclusion attributes";
+            this.chkApplyObfuscationAttributes.UseVisualStyleBackColor = true;
+            // 
+            // chkExplicitDeserialization
+            // 
+            this.chkExplicitDeserialization.AutoSize = true;
+            this.chkExplicitDeserialization.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UseExplicitDeserialization;
+            this.chkExplicitDeserialization.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UseExplicitDeserialization", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkExplicitDeserialization.Location = new System.Drawing.Point(349, 107);
+            this.chkExplicitDeserialization.Name = "chkExplicitDeserialization";
+            this.chkExplicitDeserialization.Size = new System.Drawing.Size(198, 17);
+            this.chkExplicitDeserialization.TabIndex = 10;
+            this.chkExplicitDeserialization.Text = "Use explicit deserialization (obsolete)";
+            this.chkExplicitDeserialization.UseVisualStyleBackColor = true;
+            this.chkExplicitDeserialization.CheckedChanged += new System.EventHandler(this.chkExplicitDeserialization_CheckedChanged);
+            // 
+            // chkPascalCase
+            // 
+            this.chkPascalCase.AutoSize = true;
+            this.chkPascalCase.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UsePascalCase;
+            this.chkPascalCase.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPascalCase.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UsePascalCase", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkPascalCase.Location = new System.Drawing.Point(349, 84);
+            this.chkPascalCase.Name = "chkPascalCase";
+            this.chkPascalCase.Size = new System.Drawing.Size(134, 17);
+            this.chkPascalCase.TabIndex = 9;
+            this.chkPascalCase.Text = "Convert to PascalCase";
+            this.chkPascalCase.UseVisualStyleBackColor = true;
+            // 
+            // edtMainClass
+            // 
+            this.edtMainClass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "MainClassName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.edtMainClass.Location = new System.Drawing.Point(115, 54);
+            this.edtMainClass.Name = "edtMainClass";
+            this.edtMainClass.Size = new System.Drawing.Size(185, 20);
+            this.edtMainClass.TabIndex = 1;
+            this.edtMainClass.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.MainClassName;
+            this.edtMainClass.TextChanged += new System.EventHandler(this.edtMainClass_TextChanged);
+            // 
+            // edtTargetFolder
+            // 
+            this.edtTargetFolder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.edtTargetFolder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.edtTargetFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "TargetFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.edtTargetFolder.Location = new System.Drawing.Point(115, 82);
+            this.edtTargetFolder.Name = "edtTargetFolder";
+            this.edtTargetFolder.Size = new System.Drawing.Size(155, 20);
+            this.edtTargetFolder.TabIndex = 2;
+            this.edtTargetFolder.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.TargetFolder;
+            // 
+            // chkNoHelper
+            // 
+            this.chkNoHelper.AutoSize = true;
+            this.chkNoHelper.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.NoHelper;
+            this.chkNoHelper.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "NoHelper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkNoHelper.Location = new System.Drawing.Point(366, 130);
+            this.chkNoHelper.Name = "chkNoHelper";
+            this.chkNoHelper.Size = new System.Drawing.Size(162, 17);
+            this.chkNoHelper.TabIndex = 11;
+            this.chkNoHelper.Text = "Do not generate helper class";
+            this.chkNoHelper.UseVisualStyleBackColor = true;
+            // 
+            // edtNamespace
+            // 
+            this.edtNamespace.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "Namespace", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.edtNamespace.Location = new System.Drawing.Point(115, 27);
+            this.edtNamespace.Name = "edtNamespace";
+            this.edtNamespace.Size = new System.Drawing.Size(185, 20);
+            this.edtNamespace.TabIndex = 0;
+            this.edtNamespace.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.Namespace;
+            this.edtNamespace.TextChanged += new System.EventHandler(this.edtNamespace_TextChanged);
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -703,6 +757,9 @@
             this.Controls.Add(this.btnCompact);
             this.Controls.Add(this.btnBeautify);
             this.Controls.Add(this.feedbackLabel);
+            this.Controls.Add(this.chkCreateNew);
+            this.Controls.Add(this.chkCreateCopyable);
+            this.Controls.Add(this.chkUseRegions);
             this.Controls.Add(this.chkDeduplicate);
             this.Controls.Add(this.lblPosition);
             this.Controls.Add(this.edtJson);
@@ -819,6 +876,10 @@
         private System.Windows.Forms.Label feedbackLabel;
         private System.Windows.Forms.Button btnCompact;
         private System.Windows.Forms.Button btnBeautify;
+        private System.Windows.Forms.CheckBox chkUseRegions;
+        private System.Windows.Forms.RadioButton radFullProperty;
+        private System.Windows.Forms.CheckBox chkCreateCopyable;
+        private System.Windows.Forms.CheckBox chkCreateNew;
     }
 }
 

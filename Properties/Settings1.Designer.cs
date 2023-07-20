@@ -12,7 +12,7 @@ namespace Xamasoft.JsonClassGenerator.UI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -37,13 +37,13 @@ namespace Xamasoft.JsonClassGenerator.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseProperties {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PropertieMode {
             get {
-                return ((bool)(this["UseProperties"]));
+                return ((int)(this["PropertieMode"]));
             }
             set {
-                this["UseProperties"] = value;
+                this["PropertieMode"] = value;
             }
         }
         
@@ -224,6 +224,42 @@ namespace Xamasoft.JsonClassGenerator.UI.Properties {
             }
             set {
                 this["DeDuplicateClasses"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseRegions {
+            get {
+                return ((bool)(this["UseRegions"]));
+            }
+            set {
+                this["UseRegions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateCopyable {
+            get {
+                return ((bool)(this["CreateCopyable"]));
+            }
+            set {
+                this["CreateCopyable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateNew {
+            get {
+                return ((bool)(this["CreateNew"]));
+            }
+            set {
+                this["CreateNew"] = value;
             }
         }
     }

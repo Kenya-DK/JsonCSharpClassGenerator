@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Windows.Forms;
 
 using Newtonsoft.Json;
@@ -59,7 +60,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             }
 
             var settings = Properties.Settings.Default;
-            settings.UseProperties = radProperties.Checked;
+            settings.PropertieMode = (int)GetPropertyMode();
             settings.InternalVisibility = radInternal.Checked;
             settings.SecondaryNamespace = edtSecondaryNamespace.Text;
 
@@ -75,13 +76,21 @@ namespace Xamasoft.JsonClassGenerator.UI
             settings.SingleFile = chkSingleFile.Checked;
             settings.DocumentationExamples = chkDocumentationExamples.Checked;
             settings.DeDuplicateClasses = chkDeduplicate.Checked;
+            settings.UseRegions = chkUseRegions.Checked;
+            settings.CreateCopyable = chkCreateCopyable.Checked;
+            settings.CreateNew = chkCreateNew.Checked;
             settings.Save();
         }
 
         private void frmCSharpClassGeneration_Load(object sender, EventArgs e)
         {
             var settings = Properties.Settings.Default;
-            (settings.UseProperties ? radProperties : radFields).Checked = true;
+            if (settings.PropertieMode == 0)
+                radFullProperty.Checked = true;
+            else if (settings.PropertieMode == 1)
+                radProperties.Checked = true;
+            else
+                radFields.Checked = true;
             (settings.InternalVisibility ? radInternal : radPublic).Checked = true;
             edtSecondaryNamespace.Text = settings.SecondaryNamespace;
             if (settings.NamespaceStrategy == 0) radNestedClasses.Checked = true;
@@ -93,6 +102,9 @@ namespace Xamasoft.JsonClassGenerator.UI
             chkSingleFile.Checked = settings.SingleFile;
             chkDocumentationExamples.Checked = settings.DocumentationExamples;
             chkDeduplicate.Checked = settings.DeDuplicateClasses;
+            chkUseRegions.Checked = settings.UseRegions;
+            chkCreateCopyable.Checked = settings.CreateCopyable;
+            chkCreateNew.Checked = settings.CreateNew;
             UpdateStatus();
         }
 
@@ -216,11 +228,14 @@ namespace Xamasoft.JsonClassGenerator.UI
             {
                 Example = edtJson.Text,
                 InternalVisibility = radInternal.Checked,
-                CodeWriter = (ICodeWriter) cmbLanguage.SelectedItem,
+                CodeWriter = (ICodeWriter)cmbLanguage.SelectedItem,
                 DeduplicateClasses = chkDeduplicate.Checked,
                 TargetFolder = edtTargetFolder.Text,
-                UseProperties = radProperties.Checked,
+                PropertieMode = GetPropertyMode(),
                 MainClass = edtMainClass.Text,
+                UseRegions = chkUseRegions.Checked,
+                CreateCopyable = chkCreateCopyable.Checked,
+                CreateNew = chkCreateNew.Checked,
                 SortMemberFields = chkSortMembers.Checked,
                 UsePascalCase = chkPascalCase.Checked,
                 UseNestedClasses = radNestedClasses.Checked,
@@ -268,6 +283,17 @@ namespace Xamasoft.JsonClassGenerator.UI
             chkExplicitDeserialization.Enabled = writer is CSharpCodeWriter;
             chkNoHelper.Enabled = chkExplicitDeserialization.Enabled && chkExplicitDeserialization.Checked;
         }
+
+        public PropertyModeEnum GetPropertyMode()
+        {
+            if (radFullProperty.Checked)
+                return PropertyModeEnum.FullProperty;
+            else if (radProperties.Checked)
+                return PropertyModeEnum.Properties;
+            else
+                return PropertyModeEnum.Fields;
+        }
+
 
         private void radNestedClasses_CheckedChanged(object sender, EventArgs e)
         {
@@ -453,7 +479,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             try
             {
                 JObject.Parse(edtJson.Text);
-                MessageBox.Show(Resources.JsonValidationOk, Resources.JsonValidationTitle, 
+                MessageBox.Show(Resources.JsonValidationOk, Resources.JsonValidationTitle,
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
