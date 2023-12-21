@@ -112,6 +112,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             new CSharpCodeWriter(),
             new VisualBasicCodeWriter(),
             new TypeScriptCodeWriter(),
+            new RustCodeWriter(),
           //  new JavaCodeWriter()
         };
 

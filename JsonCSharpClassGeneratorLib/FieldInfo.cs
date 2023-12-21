@@ -25,6 +25,36 @@ namespace Xamasoft.JsonClassGenerator
         private IJsonClassGeneratorConfig generator;
         public string MemberName { get; private set; }
         public string JsonMemberName { get; private set; }
+        public string SnakeCase
+        {
+            get
+            {
+                StringBuilder result = new StringBuilder();
+                bool isFirstCharacter = true;
+
+                foreach (char c in MemberName)
+                {
+                    if (char.IsUpper(c))
+                    {
+                        if (!isFirstCharacter)
+                        {
+                            result.Append('_');
+                        }
+
+                        result.Append(char.ToLower(c));
+                    }
+                    else
+                    {
+                        result.Append(c);
+                    }
+
+                    isFirstCharacter = false;
+                }
+
+                return result.ToString();
+
+            }
+        }
         public JsonType Type { get; private set; }
         public IList<object> Examples { get; private set; }
 
