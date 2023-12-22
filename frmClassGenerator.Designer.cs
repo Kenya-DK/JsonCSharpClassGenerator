@@ -79,7 +79,6 @@
             this.saveDlg = new System.Windows.Forms.SaveFileDialog();
             this.edtJson = new EasyScintilla.SimpleEditor();
             this.lblPosition = new System.Windows.Forms.Label();
-            this.feedbackLabel = new System.Windows.Forms.Label();
             this.btnCompact = new System.Windows.Forms.Button();
             this.btnBeautify = new System.Windows.Forms.Button();
             this.chkCreateNew = new System.Windows.Forms.CheckBox();
@@ -94,6 +93,7 @@
             this.edtTargetFolder = new System.Windows.Forms.TextBox();
             this.chkNoHelper = new System.Windows.Forms.CheckBox();
             this.edtNamespace = new System.Windows.Forms.TextBox();
+            this.feedbackLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -572,20 +572,10 @@
             this.lblPosition.TabIndex = 44;
             this.lblPosition.Text = "0 / 0";
             // 
-            // feedbackLabel
-            // 
-            this.feedbackLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.feedbackLabel.Location = new System.Drawing.Point(15, 590);
-            this.feedbackLabel.Name = "feedbackLabel";
-            this.feedbackLabel.Size = new System.Drawing.Size(532, 29);
-            this.feedbackLabel.TabIndex = 46;
-            this.feedbackLabel.Text = "0 / 0";
-            this.feedbackLabel.Visible = false;
-            // 
             // btnCompact
             // 
             this.btnCompact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCompact.Location = new System.Drawing.Point(115, 593);
+            this.btnCompact.Location = new System.Drawing.Point(215, 593);
             this.btnCompact.Name = "btnCompact";
             this.btnCompact.Size = new System.Drawing.Size(60, 23);
             this.btnCompact.TabIndex = 50;
@@ -596,7 +586,7 @@
             // btnBeautify
             // 
             this.btnBeautify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBeautify.Location = new System.Drawing.Point(51, 593);
+            this.btnBeautify.Location = new System.Drawing.Point(151, 593);
             this.btnBeautify.Name = "btnBeautify";
             this.btnBeautify.Size = new System.Drawing.Size(60, 23);
             this.btnBeautify.TabIndex = 49;
@@ -749,6 +739,16 @@
             this.edtNamespace.Text = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.Namespace;
             this.edtNamespace.TextChanged += new System.EventHandler(this.edtNamespace_TextChanged);
             // 
+            // feedbackLabel
+            // 
+            this.feedbackLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.feedbackLabel.Location = new System.Drawing.Point(15, 590);
+            this.feedbackLabel.Name = "feedbackLabel";
+            this.feedbackLabel.Size = new System.Drawing.Size(532, 29);
+            this.feedbackLabel.TabIndex = 46;
+            this.feedbackLabel.Text = "0 / 0";
+            this.feedbackLabel.Visible = false;
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -873,13 +873,13 @@
         private EasyScintilla.SimpleEditor edtJson;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.CheckBox chkDeduplicate;
-        private System.Windows.Forms.Label feedbackLabel;
         private System.Windows.Forms.Button btnCompact;
         private System.Windows.Forms.Button btnBeautify;
         private System.Windows.Forms.CheckBox chkUseRegions;
         private System.Windows.Forms.RadioButton radFullProperty;
         private System.Windows.Forms.CheckBox chkCreateCopyable;
         private System.Windows.Forms.CheckBox chkCreateNew;
+        private System.Windows.Forms.Label feedbackLabel;
     }
 }
 
