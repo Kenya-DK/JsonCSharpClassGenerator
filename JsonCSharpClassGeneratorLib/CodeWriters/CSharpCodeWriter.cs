@@ -74,9 +74,12 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 sw.WriteLine("using System.Collections.Generic;");
                 if (ShouldApplyNoPruneAttribute(config) || ShouldApplyNoRenamingAttribute(config))
                     sw.WriteLine("using System.Reflection;");
-                if (!config.ExplicitDeserialization && config.UsePascalCase)
+                if (!config.ExplicitDeserialization && config.UsePascalCase && !config.UseDataContract)
                     sw.WriteLine("using Newtonsoft.Json;");
-                sw.WriteLine("using Newtonsoft.Json.Linq;");
+
+                if (config.UseDataContract)
+                    sw.WriteLine("using System.Runtime.Serialization;");
+
                 if (config.ExplicitDeserialization)
                     sw.WriteLine("using JsonCSharpClassGenerator;");
                 if (config.SecondaryNamespace != null && config.HasSecondaryClasses && !config.UseNestedClasses)
@@ -125,8 +128,11 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 sw.WriteLine("     /// </summary>");
             }
 
+
             if (config.UseNestedClasses)
             {
+                if (config.UseDataContract)
+                    sw.WriteLine("        [DataContract]");
                 if (!type.IsRoot)
                 {
                     if (ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("        " + NoRenameAttribute);
@@ -139,6 +145,8 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             {
                 if (ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("    " + NoRenameAttribute);
                 if (ShouldApplyNoPruneAttribute(config)) sw.WriteLine("    " + NoPruneAttribute);
+                if (config.UseDataContract)
+                    sw.WriteLine("    [DataContract]");
                 sw.WriteLine("    {0} class {1}", visibility, type.AssignedName);
                 sw.WriteLine("    {");
             }
@@ -254,10 +262,41 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#region Override Methods");
 
-
+            if (config.ExamplesInDocumentation)
+            {
+                sw.WriteLine(prefix + "/// <summary>");
+                sw.WriteLine(prefix + "/// Override ToString for <see cref=\"{0}\"/>", type.AssignedName);
+                sw.WriteLine(prefix + "/// </summary>");
+                sw.WriteLine(prefix + "/// <returns>");
+                sw.WriteLine(prefix + "/// Returns store data in string.");
+                sw.WriteLine(prefix + "/// </returns>");
+            }
+                StringBuilder sb = new StringBuilder();
+                sb.Append("$\"");
+            foreach (var field in theFields)
+            {
+                switch (config.PropertieMode)
+                {
+                    case PropertyModeEnum.Properties:
+                    case PropertyModeEnum.Fields:
+                        sb.Append(field.MemberName+" :{" + field.MemberName + "}");
+                        break;
+                    case PropertyModeEnum.FullProperty:
+                        sb.Append(field.MemberName + ": {_" + field.JsonMemberName + "}");
+                        break;
+                }
+                //
+                if(field!= theFields.Last())
+                sb.Append(" | ");
+            }
+            sb.Append("\";");
+            sw.WriteLine(prefix + "public override string ToString()");
+            sw.WriteLine(prefix + "{");
+            sw.WriteLine(prefix + "    return "+ sb.ToString());
+            sw.WriteLine(prefix + "}");
 
             if (config.UseRegions)
-                sw.WriteLine(prefix + "#endregion");
+            sw.WriteLine(prefix + "#endregion");
 
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#region Method Get Or Set");
@@ -274,7 +313,9 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     sw.WriteLine(prefix + "/// </summary>");
                 }
 
-                if (config.UsePascalCase)
+                if (config.UsePascalCase && config.UseDataContract)
+                    sw.WriteLine(prefix + "[DataMember(Name = \"{0}\")]", field.JsonMemberName);
+                else if (config.UsePascalCase)
                     sw.WriteLine(prefix + "[JsonProperty(\"{0}\")]", field.JsonMemberName);
 
                 switch (config.PropertieMode)
@@ -332,10 +373,10 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     {
                         case PropertyModeEnum.Properties:
                         case PropertyModeEnum.Fields:
-                            if(field.Type.GetTypeName().ToLower().Contains("list"))
+                            if (field.Type.GetTypeName().ToLower().Contains("list"))
                                 sw.WriteLine(prefix + "    clone.{0} = {0}.ToList();", field.MemberName);
                             else
-                            sw.WriteLine(prefix + "    clone.{0} = {0};", field.MemberName);
+                                sw.WriteLine(prefix + "    clone.{0} = {0};", field.MemberName);
                             break;
                         case PropertyModeEnum.FullProperty:
                             if (field.Type.GetTypeName().ToLower().Contains("list"))

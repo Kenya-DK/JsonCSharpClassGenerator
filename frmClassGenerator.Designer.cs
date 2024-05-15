@@ -94,6 +94,7 @@
             this.chkNoHelper = new System.Windows.Forms.CheckBox();
             this.edtNamespace = new System.Windows.Forms.TextBox();
             this.feedbackLabel = new System.Windows.Forms.Label();
+            this.chkUseDataContract = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -749,11 +750,22 @@
             this.feedbackLabel.Text = "0 / 0";
             this.feedbackLabel.Visible = false;
             // 
+            // chkUseDataContract
+            // 
+            this.chkUseDataContract.AutoSize = true;
+            this.chkUseDataContract.Location = new System.Drawing.Point(621, 200);
+            this.chkUseDataContract.Name = "chkUseDataContract";
+            this.chkUseDataContract.Size = new System.Drawing.Size(137, 17);
+            this.chkUseDataContract.TabIndex = 51;
+            this.chkUseDataContract.Text = "Use Data Contract (C#)";
+            this.chkUseDataContract.UseVisualStyleBackColor = true;
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 628);
+            this.Controls.Add(this.chkUseDataContract);
             this.Controls.Add(this.btnCompact);
             this.Controls.Add(this.btnBeautify);
             this.Controls.Add(this.feedbackLabel);
@@ -880,6 +892,7 @@
         private System.Windows.Forms.CheckBox chkCreateCopyable;
         private System.Windows.Forms.CheckBox chkCreateNew;
         private System.Windows.Forms.Label feedbackLabel;
+        private System.Windows.Forms.CheckBox chkUseDataContract;
     }
 }
 

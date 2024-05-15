@@ -79,6 +79,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             settings.UseRegions = chkUseRegions.Checked;
             settings.CreateCopyable = chkCreateCopyable.Checked;
             settings.CreateNew = chkCreateNew.Checked;
+            settings.UseDataContract = chkUseDataContract.Checked;
             settings.Save();
         }
 
@@ -105,6 +106,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             chkUseRegions.Checked = settings.UseRegions;
             chkCreateCopyable.Checked = settings.CreateCopyable;
             chkCreateNew.Checked = settings.CreateNew;
+            chkUseDataContract.Checked = settings.UseDataContract;
             UpdateStatus();
         }
 
@@ -240,6 +242,7 @@ namespace Xamasoft.JsonClassGenerator.UI
                 SortMemberFields = chkSortMembers.Checked,
                 UsePascalCase = chkPascalCase.Checked,
                 UseNestedClasses = radNestedClasses.Checked,
+                UseDataContract= chkUseDataContract.Checked,
                 ApplyObfuscationAttributes = chkApplyObfuscationAttributes.Checked,
                 SingleFile = chkSingleFile.Checked,
                 ExamplesInDocumentation = chkDocumentationExamples.Checked,

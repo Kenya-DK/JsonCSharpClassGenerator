@@ -32,6 +32,7 @@ namespace Xamasoft.JsonClassGenerator
         public bool SortMemberFields { get; set; }
         public bool UsePascalCase { get; set; }
         public bool UseNestedClasses { get; set; }
+        public bool UseDataContract { get; set; }
         public bool ApplyObfuscationAttributes { get; set; }
         public bool SingleFile { get; set; }
         public ICodeWriter CodeWriter { get; set; }

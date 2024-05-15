@@ -20,6 +20,7 @@ namespace Xamasoft.JsonClassGenerator
         bool SortMemberFields { get; set; }
         bool UsePascalCase { get; set; }
         bool UseNestedClasses { get; set; }
+        bool UseDataContract { get; set; }
         bool ApplyObfuscationAttributes { get; set; }
         bool SingleFile { get; set; }
         ICodeWriter CodeWriter { get; set; }
