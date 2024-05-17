@@ -31,7 +31,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             switch (type.Type)
             {
                 case JsonTypeEnum.Anything: return "object";
-                case JsonTypeEnum.Array: return arraysAsLists ? "IList<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
+                case JsonTypeEnum.Array: return arraysAsLists ? "List<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
                 case JsonTypeEnum.Dictionary: return "Dictionary<string, " + GetTypeName(type.InternalType, config) + ">";
                 case JsonTypeEnum.Boolean: return "bool";
                 case JsonTypeEnum.Float: return "double";
@@ -228,7 +228,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 }
                 sw.WriteLine(prefix + "public {0}()", type.AssignedName);
                 sw.WriteLine(prefix + "{");
-                var listTypeFilds = theFields.Where(f => f.Type.GetTypeName().ToLower().Contains("list")).ToList();
+                var listTypeFilds = theFields.Where(f => f.Type.Type == JsonTypeEnum.Array).ToList();
                 foreach (var field in listTypeFilds)
                 {
                     switch (config.PropertieMode)
@@ -254,8 +254,6 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#region Methods");
 
-
-
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#endregion");
 
@@ -271,32 +269,38 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 sw.WriteLine(prefix + "/// Returns store data in string.");
                 sw.WriteLine(prefix + "/// </returns>");
             }
-                StringBuilder sb = new StringBuilder();
-                sb.Append("$\"");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("$\"");
             foreach (var field in theFields)
             {
                 switch (config.PropertieMode)
                 {
                     case PropertyModeEnum.Properties:
                     case PropertyModeEnum.Fields:
-                        sb.Append(field.MemberName+" :{" + field.MemberName + "}");
+                        if (field.Type.Type == JsonTypeEnum.Array)
+                            sb.Append(field.MemberName + " :{" + field.MemberName + ".Count}");
+                        else
+                            sb.Append(field.MemberName + " :{" + field.MemberName + "}");
                         break;
                     case PropertyModeEnum.FullProperty:
-                        sb.Append(field.MemberName + ": {_" + field.JsonMemberName + "}");
+                        if (field.Type.Type == JsonTypeEnum.Array)
+                            sb.Append(field.MemberName + ": {_" + field.JsonMemberName + ".Count}");
+                        else
+                            sb.Append(field.MemberName + ": {_" + field.JsonMemberName + "}");
                         break;
                 }
                 //
-                if(field!= theFields.Last())
-                sb.Append(" | ");
+                if (field != theFields.Last())
+                    sb.Append(" | ");
             }
             sb.Append("\";");
             sw.WriteLine(prefix + "public override string ToString()");
             sw.WriteLine(prefix + "{");
-            sw.WriteLine(prefix + "    return "+ sb.ToString());
+            sw.WriteLine(prefix + "    return " + sb.ToString());
             sw.WriteLine(prefix + "}");
 
             if (config.UseRegions)
-            sw.WriteLine(prefix + "#endregion");
+                sw.WriteLine(prefix + "#endregion");
 
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#region Method Get Or Set");
