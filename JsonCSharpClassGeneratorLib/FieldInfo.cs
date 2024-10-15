@@ -25,6 +25,13 @@ namespace Xamasoft.JsonClassGenerator
         private IJsonClassGeneratorConfig generator;
         public string MemberName { get; private set; }
         public string JsonMemberName { get; private set; }
+        public string PrivatePropertyName
+        {
+            get
+            {
+                return "_"+MemberName.Substring(0, 1).ToLower() + MemberName.Substring(1);
+            }
+        }
         public string SnakeCase
         {
             get

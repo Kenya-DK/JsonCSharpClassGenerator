@@ -209,7 +209,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
 
             if (config.PropertieMode == PropertyModeEnum.FullProperty)
                 foreach (var field in theFields)
-                    sw.WriteLine(prefix + "private {0} {1};", field.Type.GetTypeName(), "_" + field.JsonMemberName);
+                    sw.WriteLine(prefix + "private {0} {1};", field.Type.GetTypeName(), field.PrivatePropertyName);
 
             if (config.UseRegions)
                 sw.WriteLine(prefix + "#endregion");
@@ -333,8 +333,8 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     case PropertyModeEnum.FullProperty:
                         sw.WriteLine(prefix + "public {0} {1}", field.Type.GetTypeName(), field.MemberName);
                         sw.WriteLine(prefix + "{");
-                        sw.WriteLine(prefix + "    get => {0};", "_" + field.JsonMemberName);
-                        sw.WriteLine(prefix + "    set { _" + field.JsonMemberName + " = value; }");
+                        sw.WriteLine(prefix + "    get => {0};", field.PrivatePropertyName);
+                        sw.WriteLine(prefix + "    set { " + field.PrivatePropertyName + " = value; }");
                         sw.WriteLine(prefix + "}");
                         break;
                 }
@@ -384,9 +384,9 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                             break;
                         case PropertyModeEnum.FullProperty:
                             if (field.Type.GetTypeName().ToLower().Contains("list"))
-                                sw.WriteLine(prefix + "    clone._{0} = _{0}.ToList();", field.JsonMemberName);
+                                sw.WriteLine(prefix + "    clone.{0} = {0}.ToList();", field.PrivatePropertyName);
                             else
-                                sw.WriteLine(prefix + "    clone._{0} = _{0};", field.JsonMemberName);
+                                sw.WriteLine(prefix + "    clone.{0} = {0};", field.PrivatePropertyName);
                             break;
                     }
                 }

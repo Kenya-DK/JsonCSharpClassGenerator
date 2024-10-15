@@ -35,14 +35,28 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                 case JsonTypeEnum.NullableBoolean: return "Option<bool>";
                 case JsonTypeEnum.NullableDate: return "Option<String>";
                 case JsonTypeEnum.Object: return type.AssignedName;
-                case JsonTypeEnum.Array: return "Vec<"+GetTypeName(type.InternalType, config) + ">";
+                case JsonTypeEnum.Array: return "Vec<" + GetTypeName(type.InternalType, config) + ">";
                 //case JsonTypeEnum.Dictionary: return "{ [key: string]: " + GetTypeName(type.InternalType, config) + "; }";
                 case JsonTypeEnum.NullableSomething: return "Option<String>";
                 case JsonTypeEnum.NonConstrained: return "Option<String>";
                 default: throw new NotSupportedException("Unsupported type");
             }
         }
-
+        public bool IsNullable(JsonType type)
+        {
+            switch (type.Type)
+            {
+                case JsonTypeEnum.NullableInteger:
+                case JsonTypeEnum.NullableLong:
+                case JsonTypeEnum.NullableFloat:
+                case JsonTypeEnum.NullableBoolean:
+                case JsonTypeEnum.NullableDate:
+                case JsonTypeEnum.NullableSomething:
+                case JsonTypeEnum.NonConstrained:
+                    return true;
+                default: return false;
+            }
+        }
         public void WriteClass(IJsonClassGeneratorConfig config, TextWriter sw, JsonType type)
         {
             var prefix = "";
@@ -57,10 +71,10 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     sw.WriteLine();
                     sw.WriteLine(prefix + "    // Examples: " + field.GetExamplesText());
                 }
-
+                if (IsNullable(field.Type))
+                    sw.WriteLine(prefix + "    " + "#[serde(skip_serializing_if = \"Option::is_none\")]");
                 sw.WriteLine(prefix + "    " + "#[serde(rename = \"" + field.JsonMemberName + "\")]");
-                //sw.WriteLine(prefix + "    " + (exported ? "pub " : string.Empty) + field.JsonMemberName + (IsNullable(field.Type.Type) ? "?" : "") + ": " + (shouldDefineNamespace ? config.SecondaryNamespace + "." : string.Empty) + GetTypeName(field.Type, config) + ",");
-                sw.WriteLine(prefix + "    " + (exported ? "pub " : string.Empty) + field.SnakeCase + (IsNullable(field.Type.Type) ? "?" : "") + ": " + (shouldDefineNamespace ? config.SecondaryNamespace + "." : string.Empty) + GetTypeName(field.Type, config) + ",");
+                sw.WriteLine(prefix + "    " + (exported ? "pub " : string.Empty) + field.SnakeCase + ": " + (shouldDefineNamespace ? config.SecondaryNamespace + "." : string.Empty) + GetTypeName(field.Type, config) + ",");
             }
             sw.WriteLine(prefix + "}");
             sw.WriteLine();
