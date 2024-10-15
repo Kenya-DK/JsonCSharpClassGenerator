@@ -550,6 +550,7 @@
             // 
             // edtJson
             // 
+            this.edtJson.AllowDrop = true;
             this.edtJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -559,6 +560,8 @@
             this.edtJson.Size = new System.Drawing.Size(739, 311);
             this.edtJson.Styler = null;
             this.edtJson.TabIndex = 43;
+            this.edtJson.DragDrop += new System.Windows.Forms.DragEventHandler(this.edtJson_DragDrop);
+            this.edtJson.DragEnter += new System.Windows.Forms.DragEventHandler(this.edtJson_DragEnter);
             this.edtJson.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtJson_KeyDown);
             this.edtJson.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditorPositionChanged);
             this.edtJson.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EditorPositionChanged);

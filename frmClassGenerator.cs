@@ -511,6 +511,34 @@ namespace Xamasoft.JsonClassGenerator.UI
             edtJson.Text = JsonConvert.SerializeObject(parsedJson, Formatting.None);
         }
 
+        private void edtJson_DragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files == null)
+                return;
+            foreach (var file in files)
+            {
+                var ext = System.IO.Path.GetExtension(file);
+                if (ext.Equals(".json", StringComparison.CurrentCultureIgnoreCase) ||
+                    ext.Equals(".txt", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                    return;
+                }
+            }
+        }
+
+        private void edtJson_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files == null)
+                return;
+            string filePath = files[0];
+            edtJson.Text = File.ReadAllText(filePath);
+        }
+
 
         #endregion
 
